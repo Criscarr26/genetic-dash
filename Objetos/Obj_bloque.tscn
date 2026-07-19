@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://d01in7s6uxak6"]
+
+[ext_resource type="Texture2D" uid="uid://dhrinss7w3jdt" path="res://Sprites/bloque.png" id="1_qkrvm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1x0i7"]
+size = Vector2(64, 64)
+
+[node name="StaticBody2D" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.6666667, 0.6597938)
+texture = ExtResource("1_qkrvm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1x0i7")

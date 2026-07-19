@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="64" viewBox="0 0 128 64">
+  <defs>
+    <linearGradient id="pad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fff3b0"/>
+      <stop offset="45%" stop-color="#ffd94a"/>
+      <stop offset="100%" stop-color="#e8a80c"/>
+    </linearGradient>
+  </defs>
+  <!-- base oscura -->
+  <rect x="18" y="50" width="92" height="12" rx="4" fill="#2a2a3a" stroke="#e8dede" stroke-width="3"/>
+  <!-- colchón amarillo -->
+  <path d="M 12 52 Q 64 8 116 52 Z" fill="url(#pad)" stroke="#ffffff" stroke-width="5"/>
+  <!-- brillo -->
+  <path d="M 30 44 Q 64 20 86 36" fill="none" stroke="#ffffff" stroke-width="4" opacity="0.7" stroke-linecap="round"/>
+</svg>

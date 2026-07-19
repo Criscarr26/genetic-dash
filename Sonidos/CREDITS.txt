@@ -1,0 +1,21 @@
+CRÉDITOS DE AUDIO
+=================
+
+Toda la música y los efectos de sonido son de Juhani Junkala (SubspaceAudio),
+publicados bajo licencia CC0 (dominio público) en OpenGameArt.org.
+
+Música (pack "5 Chiptunes (Action)" / "Retro Game Music Pack"):
+  https://opengameart.org/content/5-chiptunes-action
+  - musica_menu.ogg    = Title Screen
+  - musica_nivel1.ogg  = Level 1
+  - musica_nivel2.ogg  = Level 2
+  - musica_nivel3.ogg  = Level 3
+  - musica_fin.ogg     = Ending
+
+Efectos (pack "512 Sound Effects (8-bit style)"):
+  https://opengameart.org/content/512-sound-effects-8-bit-style
+  - salto.wav      = sfx_movement_jump1.wav
+  - trampolin.wav  = sfx_movement_jump10.wav
+  - muerte.wav     = sfx_exp_short_hard2.wav
+  - orbe.wav       = sfx_coin_single1.wav
+  - portal.wav     = sfx_movement_portal1.wav

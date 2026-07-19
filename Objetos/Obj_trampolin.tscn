@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://diu3c3c7y64wd"]
+
+[ext_resource type="Script" uid="uid://bbpkcrysjj64v" path="res://Scripts/trampolin.gd" id="1_hwvg4"]
+[ext_resource type="Texture2D" path="res://Sprites/trampolin.svg" id="2_tramp"]
+[ext_resource type="AudioStream" path="res://Sonidos/trampolin.wav" id="3_snd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pad"]
+size = Vector2(116, 44)
+
+[node name="ObjTrampolin" type="Area2D"]
+script = ExtResource("1_hwvg4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_tramp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_pad")
+
+[node name="SndRebote" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_snd")
+volume_db = -5.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
