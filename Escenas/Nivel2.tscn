@@ -1,0 +1,189 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Scripts/nivel.gd" id="1_niv"]
+[ext_resource type="PackedScene" uid="uid://sc2vxim42f80" path="res://Objetos/jugador.tscn" id="2_jug"]
+[ext_resource type="PackedScene" uid="uid://d01in7s6uxak6" path="res://Objetos/Obj_bloque.tscn" id="3_blo"]
+[ext_resource type="PackedScene" uid="uid://cjfgqsgauh4qo" path="res://Objetos/Obj_pua.tscn" id="4_pua"]
+[ext_resource type="PackedScene" uid="uid://diu3c3c7y64wd" path="res://Objetos/Obj_trampolin.tscn" id="5_tra"]
+[ext_resource type="PackedScene" path="res://Objetos/Obj_meta.tscn" id="9_met"]
+[ext_resource type="Texture2D" path="res://Sprites/suelo.svg" id="10_sue"]
+[ext_resource type="AudioStream" path="res://Sonidos/musica_nivel2.ogg" id="11_mus"]
+
+[sub_resource type="Gradient" id="Gradient_fondo"]
+colors = PackedColorArray(0.02, 0.2, 0.3, 1, 0.05, 0.45, 0.5, 1)
+
+[sub_resource type="GradientTexture2D" id="GradTex_fondo"]
+gradient = SubResource("Gradient_fondo")
+fill_from = Vector2(0, 0)
+fill_to = Vector2(0, 1)
+width = 1280
+height = 780
+
+[sub_resource type="RectangleShape2D" id="Shape_suelo_0"]
+size = Vector2(7552, 256)
+
+[node name="Nivel2" type="Node2D"]
+script = ExtResource("1_niv")
+
+[node name="Fondo" type="CanvasLayer" parent="."]
+layer = -10
+
+[node name="FondoTex" type="TextureRect" parent="Fondo"]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 1260.0
+offset_bottom = 760.0
+texture = SubResource("GradTex_fondo")
+
+[node name="Musica" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_mus")
+volume_db = -10.0
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Titulo" type="Label" parent="HUD"]
+offset_left = 16.0
+offset_top = 10.0
+offset_right = 500.0
+offset_bottom = 40.0
+theme_override_font_sizes/font_size = 22
+text = "Nivel 2 - Salto Alto"
+
+[node name="Ayuda" type="Label" parent="HUD"]
+offset_left = 16.0
+offset_top = 40.0
+offset_right = 700.0
+offset_bottom = 64.0
+theme_override_font_sizes/font_size = 14
+modulate = Color(1, 1, 1, 0.7)
+text = "Clic / Espacio / Flecha arriba: saltar   |   R: reiniciar   |   Esc: menu"
+
+[node name="Jugador" parent="." instance=ExtResource("2_jug")]
+position = Vector2(224, 568)
+
+[node name="Camera2D" type="Camera2D" parent="Jugador"]
+offset = Vector2(320, -40)
+limit_left = 0
+limit_top = -500
+limit_right = 8096
+limit_bottom = 760
+position_smoothing_enabled = true
+position_smoothing_speed = 6.0
+drag_vertical_enabled = true
+drag_top_margin = 0.35
+drag_bottom_margin = 0.35
+
+[node name="Suelo" type="StaticBody2D" parent="."]
+
+[node name="SueloCol0" type="CollisionShape2D" parent="Suelo"]
+position = Vector2(3648, 728)
+shape = SubResource("Shape_suelo_0")
+
+[node name="SueloVis0" type="Sprite2D" parent="Suelo"]
+position = Vector2(3648, 728)
+texture = ExtResource("10_sue")
+texture_repeat = 2
+region_enabled = true
+region_rect = Rect2(0, 0, 7552, 256)
+
+[node name="Bloque0" parent="." instance=ExtResource("3_blo")]
+position = Vector2(1440, 376)
+
+[node name="Bloque1" parent="." instance=ExtResource("3_blo")]
+position = Vector2(1504, 376)
+
+[node name="Bloque2" parent="." instance=ExtResource("3_blo")]
+position = Vector2(1568, 376)
+
+[node name="Bloque3" parent="." instance=ExtResource("3_blo")]
+position = Vector2(1632, 376)
+
+[node name="Bloque4" parent="." instance=ExtResource("3_blo")]
+position = Vector2(1696, 376)
+
+[node name="Bloque5" parent="." instance=ExtResource("3_blo")]
+position = Vector2(4192, 568)
+
+[node name="Bloque6" parent="." instance=ExtResource("3_blo")]
+position = Vector2(4192, 504)
+
+[node name="Bloque7" parent="." instance=ExtResource("3_blo")]
+position = Vector2(4192, 440)
+
+[node name="Bloque8" parent="." instance=ExtResource("3_blo")]
+position = Vector2(5472, 312)
+
+[node name="Bloque9" parent="." instance=ExtResource("3_blo")]
+position = Vector2(5536, 312)
+
+[node name="Bloque10" parent="." instance=ExtResource("3_blo")]
+position = Vector2(5600, 312)
+
+[node name="Bloque11" parent="." instance=ExtResource("3_blo")]
+position = Vector2(5664, 312)
+
+[node name="Bloque12" parent="." instance=ExtResource("3_blo")]
+position = Vector2(5728, 312)
+
+[node name="Pua0" parent="." instance=ExtResource("4_pua")]
+position = Vector2(864, 554)
+
+[node name="Pua1" parent="." instance=ExtResource("4_pua")]
+position = Vector2(2208, 554)
+
+[node name="Pua2" parent="." instance=ExtResource("4_pua")]
+position = Vector2(2528, 554)
+
+[node name="Pua3" parent="." instance=ExtResource("4_pua")]
+position = Vector2(2592, 554)
+
+[node name="Pua4" parent="." instance=ExtResource("4_pua")]
+position = Vector2(2976, 554)
+
+[node name="Pua5" parent="." instance=ExtResource("4_pua")]
+position = Vector2(3040, 554)
+
+[node name="Pua6" parent="." instance=ExtResource("4_pua")]
+position = Vector2(3104, 554)
+
+[node name="Pua7" parent="." instance=ExtResource("4_pua")]
+position = Vector2(3744, 554)
+
+[node name="Pua8" parent="." instance=ExtResource("4_pua")]
+position = Vector2(4256, 554)
+
+[node name="Pua9" parent="." instance=ExtResource("4_pua")]
+position = Vector2(4896, 554)
+
+[node name="Pua10" parent="." instance=ExtResource("4_pua")]
+position = Vector2(6368, 554)
+
+[node name="Pua11" parent="." instance=ExtResource("4_pua")]
+position = Vector2(6432, 554)
+
+[node name="Trampolin0" parent="." instance=ExtResource("5_tra")]
+position = Vector2(1184, 568)
+
+[node name="Trampolin1" parent="." instance=ExtResource("5_tra")]
+position = Vector2(2912, 568)
+
+[node name="Trampolin2" parent="." instance=ExtResource("5_tra")]
+position = Vector2(4000, 568)
+
+[node name="Trampolin3" parent="." instance=ExtResource("5_tra")]
+position = Vector2(5216, 568)
+
+[node name="PortalMeta" parent="." instance=ExtResource("9_met")]
+position = Vector2(6944, 320)
+siguiente_escena = "res://Escenas/Nivel3.tscn"
+
+[node name="Texto0" type="Label" parent="."]
+offset_left = 900.0
+offset_top = 292.0
+offset_right = 1340.0
+offset_bottom = 320.0
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+modulate = Color(1, 1, 1, 0.85)
+text = "¡Trampolin: te lanza mas alto que un salto!"
+

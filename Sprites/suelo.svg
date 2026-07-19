@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="256" viewBox="0 0 128 256">
+  <defs>
+    <linearGradient id="tierra" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1b2a6b"/>
+      <stop offset="100%" stop-color="#0a0e2a"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="128" height="256" fill="url(#tierra)"/>
+  <!-- línea superior blanca, como el suelo de GD -->
+  <rect x="0" y="0" width="128" height="5" fill="#ffffff"/>
+  <rect x="0" y="5" width="128" height="10" fill="#ffffff" opacity="0.25"/>
+  <!-- cuadrícula sutil -->
+  <g stroke="#4a5ab8" stroke-width="2" opacity="0.35">
+    <rect x="16" y="24" width="96" height="96" fill="none"/>
+    <rect x="32" y="40" width="64" height="64" fill="none"/>
+  </g>
+</svg>

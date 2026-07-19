@@ -1,0 +1,109 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Scripts/menu.gd" id="1_menu"]
+[ext_resource type="AudioStream" path="res://Sonidos/musica_menu.ogg" id="2_mus"]
+
+[sub_resource type="Gradient" id="Gradient_menu"]
+colors = PackedColorArray(0.04, 0.06, 0.25, 1, 0.3, 0.1, 0.45, 1)
+
+[sub_resource type="GradientTexture2D" id="GradTex_menu"]
+gradient = SubResource("Gradient_menu")
+fill_from = Vector2(0, 0)
+fill_to = Vector2(0, 1)
+width = 1280
+height = 780
+
+[node name="Menu" type="Control"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_menu")
+
+[node name="Fondo" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource("GradTex_menu")
+expand_mode = 1
+
+[node name="Titulo" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -400.0
+offset_right = 400.0
+offset_top = 90.0
+offset_bottom = 170.0
+theme_override_font_sizes/font_size = 64
+theme_override_colors/font_color = Color(1, 0.85, 0.3, 1)
+horizontal_alignment = 1
+text = "GENETIC DASH"
+
+[node name="Subtitulo" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -400.0
+offset_right = 400.0
+offset_top = 170.0
+offset_bottom = 200.0
+theme_override_font_sizes/font_size = 18
+modulate = Color(1, 1, 1, 0.7)
+horizontal_alignment = 1
+text = "Un juego tipo Geometry Dash"
+
+[node name="Botones" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -140.0
+offset_top = -40.0
+offset_right = 140.0
+offset_bottom = 220.0
+theme_override_constants/separation = 14
+
+[node name="BotonNivel1" type="Button" parent="Botones"]
+custom_minimum_size = Vector2(280, 48)
+theme_override_font_sizes/font_size = 22
+text = "Nivel 1 - Primeros Pasos"
+
+[node name="BotonNivel2" type="Button" parent="Botones"]
+custom_minimum_size = Vector2(280, 48)
+theme_override_font_sizes/font_size = 22
+text = "Nivel 2 - Salto Alto"
+
+[node name="BotonNivel3" type="Button" parent="Botones"]
+custom_minimum_size = Vector2(280, 48)
+theme_override_font_sizes/font_size = 22
+text = "Nivel 3 - Vuelo Final"
+
+[node name="BotonSalir" type="Button" parent="Botones"]
+custom_minimum_size = Vector2(280, 48)
+theme_override_font_sizes/font_size = 22
+text = "Salir"
+
+[node name="Controles" type="Label" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -400.0
+offset_right = 400.0
+offset_top = -60.0
+offset_bottom = -30.0
+theme_override_font_sizes/font_size = 14
+modulate = Color(1, 1, 1, 0.6)
+horizontal_alignment = 1
+text = "Controles: Clic izquierdo / Espacio / Flecha arriba para saltar"
+
+[node name="Musica" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_mus")
+volume_db = -10.0
+
+[connection signal="pressed" from="Botones/BotonNivel1" to="." method="_on_nivel_1_pressed"]
+[connection signal="pressed" from="Botones/BotonNivel2" to="." method="_on_nivel_2_pressed"]
+[connection signal="pressed" from="Botones/BotonNivel3" to="." method="_on_nivel_3_pressed"]
+[connection signal="pressed" from="Botones/BotonSalir" to="." method="_on_salir_pressed"]

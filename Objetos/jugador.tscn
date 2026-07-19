@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://sc2vxim42f80"]
+
+[ext_resource type="Script" uid="uid://lhm1516u1uyq" path="res://Scripts/jugador.gd" id="1_rw7bx"]
+[ext_resource type="Texture2D" uid="uid://6ojrf8ep1x2i" path="res://Sprites/Jugador.png" id="2_7bmwv"]
+[ext_resource type="Script" uid="uid://ctjxo25prysx4" path="res://Scripts/muerte.gd" id="3_7bmwv"]
+[ext_resource type="Texture2D" path="res://Sprites/nave.svg" id="4_nave"]
+[ext_resource type="AudioStream" path="res://Sonidos/salto.wav" id="5_salto"]
+[ext_resource type="AudioStream" path="res://Sonidos/muerte.wav" id="6_muerte"]
+[ext_resource type="AudioStream" path="res://Sonidos/orbe.wav" id="7_orbe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1x0i7"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hmnkm"]
+size = Vector2(32, 32)
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["Player"]]
+z_index = 5
+script = ExtResource("1_rw7bx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1x0i7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5470085, 0.57142854)
+texture = ExtResource("2_7bmwv")
+
+[node name="SpriteNave" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, 6)
+texture = ExtResource("4_nave")
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("3_7bmwv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_hmnkm")
+debug_color = Color(0, 0.6488718, 0.17656708, 0.41960785)
+
+[node name="SndSalto" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_salto")
+volume_db = -8.0
+
+[node name="SndMuerte" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_muerte")
+volume_db = -4.0
+
+[node name="SndOrbe" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_orbe")
+volume_db = -6.0
+
+[node name="ParticulasMuerte" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 26
+lifetime = 0.7
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 900)
+initial_velocity_min = 160.0
+initial_velocity_max = 420.0
+scale_amount_min = 3.0
+scale_amount_max = 7.0
+color = Color(1, 0.85, 0.3, 1)
+
+[connection signal="area_entered" from="Area2D" to="Area2D" method="_on_area_entered"]
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

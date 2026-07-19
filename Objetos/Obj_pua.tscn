@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cjfgqsgauh4qo"]
+
+[ext_resource type="Texture2D" uid="uid://bthp1uvh1vfcj" path="res://Sprites/pua.png" id="1_gkuji"]
+
+[node name="Obj_Pua" type="Area2D" groups=["Kill"]]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_gkuji")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-38, 46, 0, -42, 38, 46)

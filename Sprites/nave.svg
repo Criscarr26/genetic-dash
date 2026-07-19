@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="112" height="64" viewBox="0 0 112 64">
+  <defs>
+    <linearGradient id="cuerpo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c41e5c"/>
+      <stop offset="100%" stop-color="#6e0a30"/>
+    </linearGradient>
+    <radialGradient id="cabina" cx="40%" cy="35%" r="80%">
+      <stop offset="0%" stop-color="#9fd8ff"/>
+      <stop offset="100%" stop-color="#1478d2"/>
+    </radialGradient>
+  </defs>
+  <!-- ala inferior -->
+  <path d="M 6 46 L 106 46 L 92 62 L 20 62 Z" fill="#3d0519" stroke="#e8dede" stroke-width="3"/>
+  <!-- cuerpo -->
+  <path d="M 10 46 L 30 26 L 86 26 L 104 46 Z" fill="url(#cuerpo)" stroke="#e8dede" stroke-width="3"/>
+  <!-- cabina -->
+  <circle cx="52" cy="26" r="16" fill="url(#cabina)" stroke="#e8dede" stroke-width="3"/>
+  <!-- llama del propulsor -->
+  <path d="M 10 48 L -2 54 L 10 58 Z" fill="#ffd94a"/>
+</svg>
