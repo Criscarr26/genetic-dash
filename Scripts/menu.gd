@@ -22,5 +22,9 @@ func _on_nivel_3_pressed() -> void:
 	get_tree().change_scene_to_file("res://Escenas/Nivel3.tscn")
 
 
+func _on_modo_ia_pressed() -> void:
+	get_tree().change_scene_to_file("res://Escenas/MenuIA.tscn")
+
+
 func _on_salir_pressed() -> void:
 	get_tree().quit()

@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" path="res://Sonidos/salto.wav" id="5_salto"]
 [ext_resource type="AudioStream" path="res://Sonidos/muerte.wav" id="6_muerte"]
 [ext_resource type="AudioStream" path="res://Sonidos/orbe.wav" id="7_orbe"]
+[ext_resource type="Script" path="res://Scripts/IA/sensores.gd" id="8_sensores"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1x0i7"]
 size = Vector2(64, 64)
@@ -16,6 +17,8 @@ size = Vector2(32, 32)
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["Player"]]
 z_index = 5
+collision_layer = 2
+collision_mask = 1
 script = ExtResource("1_rw7bx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -31,11 +34,17 @@ position = Vector2(0, 6)
 texture = ExtResource("4_nave")
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
 script = ExtResource("3_7bmwv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_hmnkm")
 debug_color = Color(0, 0.6488718, 0.17656708, 0.41960785)
+
+[node name="Sensores" type="Node2D" parent="."]
+z_index = 10
+script = ExtResource("8_sensores")
 
 [node name="SndSalto" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_salto")

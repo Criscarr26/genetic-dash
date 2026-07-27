@@ -8,6 +8,8 @@
 size = Vector2(90, 560)
 
 [node name="PortalNormal" type="Area2D"]
+collision_layer = 32
+collision_mask = 2
 script = ExtResource("1_portal")
 tipo = 1
 

@@ -15,10 +15,23 @@ run/main_scene="res://Escenas/Menu.tscn"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+EstadoIA="*res://Scripts/IA/estado_ia.gd"
+
 [display]
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[layer_names]
+
+2d_physics/layer_1="Mundo"
+2d_physics/layer_2="Jugador"
+2d_physics/layer_3="Pua"
+2d_physics/layer_4="Orbe"
+2d_physics/layer_5="Trampolin"
+2d_physics/layer_6="Portal"
 
 [input]
 
