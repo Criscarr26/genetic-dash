@@ -1,163 +1,161 @@
 # Genetic Dash
 
-Juego de plataformas de ritmo estilo **Geometry Dash** hecho en **Godot 4**:
-un botón, reflejos y memoria. Esquiva bloques, tómate los orbes, usa los
-trampolines y cruza los portales — incluido el **portal de nave**, que cambia
-la mecánica de salto por vuelo — hasta llegar a la meta de cada nivel.
+Geometry Dash-style rhythm platformer built in **Godot 4**:
+one button, reflexes and memory. Dodge blocks, grab the orbs, use the jump pads
+and cross the portals — including the **ship portal**, which swaps the jump
+mechanic for flight — until you reach each level's goal.
 
-![Estado](https://img.shields.io/badge/estado-jugable-brightgreen)
-![Hecho con](https://img.shields.io/badge/Godot-4.7-478cbf)
-![Licencia](https://img.shields.io/badge/licencia-MIT-blue)
+![Status](https://img.shields.io/badge/status-playable-brightgreen)
+![Made with](https://img.shields.io/badge/Godot-4.7-478cbf)
+![License](https://img.shields.io/badge/license-MIT-blue)
 
-## Cómo se juega
+## How to play
 
-- **Saltar / volar:** clic izquierdo, `Espacio` o `↑`
-- Un solo toque en el momento justo lo es todo: los obstáculos matan al
-  primer contacto y el nivel reinicia.
-- **3 niveles** con música propia, más pantalla de menú y de final.
+- **Jump / fly:** left click, `Space` or `↑`
+- A single well-timed tap is everything: obstacles kill on first contact and the
+  level restarts.
+- **3 levels** each with its own music, plus menu and end screens.
 
-## Correrlo
+## Run it
 
-1. Instala [Godot 4.7+](https://godotengine.org/download).
-2. Clona este repo y abre `project.godot` desde el editor de Godot
-   (Import → seleccionar la carpeta).
-3. Presiona `F5` (Run Project).
+1. Install [Godot 4.7+](https://godotengine.org/download).
+2. Clone this repo and open `project.godot` from the Godot editor
+   (Import → select the folder).
+3. Press `F5` (Run Project).
 
-## Modo IA
+## AI mode
 
-Desde el menú, **Modo IA — Entrenar bots** abre la pantalla de configuración
-del experimento. Ahí se lanza una población de bots que aprende a jugar el
-nivel por **aprendizaje reforzado**: cada bot lleva una red neuronal propia y
-los pesos se optimizan con **algoritmos genéticos**.
+From the menu, **Modo IA — Entrenar bots** opens the experiment configuration
+screen. There it launches a population of bots that learns to play the level by
+**reinforcement learning**: each bot carries its own neural network and the
+weights are optimized with **genetic algorithms**.
 
-- **Fitness:** qué tan lejos llega el bot en el nivel.
-- **Élite:** el mejor de cada generación pasa intacto y corre de blanco,
-  dibujando sus rayos de detección.
-- **Teclas:** `1`-`4` cambian la velocidad de simulación (x1 a x8), `Esc` sale.
+- **Fitness:** how far the bot gets in the level.
+- **Elite:** the best of each generation passes through untouched and runs in
+  white, drawing its detection rays.
+- **Keys:** `1`-`4` change the simulation speed (x1 to x8), `Esc` exits.
 
-> **Sobre la velocidad:** acelerar solo con `Engine.time_scale` **cambia la
-> física** — el delta de cada paso se multiplica, así que a x8 el cubo avanza
-> 56 px por paso en vez de 7 y atraviesa obstáculos que a x1 lo matarían. Un
-> bot entrenado así no serviría en el juego real. Por eso la aceleración sube
-> también `physics_ticks_per_second`, dejando el delta en 1/60: se dan más
-> pasos por segundo real, cada uno idéntico al del juego normal. Verificado:
-> a igual semilla, x1 y x8 producen CSVs bit a bit iguales.
+> **About speed:** accelerating only with `Engine.time_scale` **changes the
+> physics** — each step's delta is multiplied, so at x8 the cube advances
+> 56 px per step instead of 7 and passes through obstacles that would kill it at
+> x1. A bot trained that way would be useless in the real game. That's why the
+> acceleration also raises `physics_ticks_per_second`, keeping the delta at 1/60:
+> more steps are taken per real second, each identical to the normal game's. Verified:
+> at the same seed, x1 and x8 produce bit-for-bit identical CSVs.
 
-### Sensores
+### Sensors
 
-Nueve entradas normalizadas a `[0,1]`, cada una activable por separado —
-apagar las que el nivel no usa acelera bastante la convergencia:
+Nine inputs normalized to `[0,1]`, each toggleable independently — turning off
+the ones a level doesn't use speeds up convergence considerably:
 
-| Sensor | Qué mide |
+| Sensor | What it measures |
 | --- | --- |
-| `dist_pua` | distancia horizontal a la próxima púa |
-| `dist_bloque` | distancia horizontal al próximo bloque |
-| `dist_techo` | distancia al techo (clave en modo nave) |
-| `dist_abismo` | distancia al borde del suelo |
-| `dist_trampolin` | distancia horizontal al próximo trampolín |
-| `en_suelo` | si está pisando el suelo |
-| `orbe_disponible` | si tiene una orbe sin gastar al alcance |
-| `modo_nave` | si va en nave o en cubo |
-| `vel_vertical` | velocidad vertical actual |
+| `dist_pua` | horizontal distance to the next spike |
+| `dist_bloque` | horizontal distance to the next block |
+| `dist_techo` | distance to the ceiling (key in ship mode) |
+| `dist_abismo` | distance to the edge of the floor |
+| `dist_trampolin` | horizontal distance to the next jump pad |
+| `en_suelo` | whether it's standing on the ground |
+| `orbe_disponible` | whether it has an unused orb within reach |
+| `modo_nave` | whether it's in ship or cube mode |
+| `vel_vertical` | current vertical velocity |
 
-### Operadores disponibles
+### Available operators
 
-- **Selección:** Top-K, Torneo, Ruleta, Rango
-- **Cruce:** ninguno, un punto, uniforme, aritmético
-- **Mutación:** uniforme, gaussiana, reemplazo
-- **Thresholding:** fijo (`salida > umbral`) o estocástico
+- **Selection:** Top-K, Tournament, Roulette, Rank
+- **Crossover:** none, single-point, uniform, arithmetic
+- **Mutation:** uniform, Gaussian, replacement
+- **Thresholding:** fixed (`output > threshold`) or stochastic
 
-### Modo por lotes (para el benchmark)
+### Batch mode (for the benchmark)
 
-El benchmark pide comparar muchas configuraciones, y hacerlo a mano por el
-menú es inviable. `Entrenar.tscn` acepta parámetros por línea de comandos —
-todo lo que va después de `--` se lee como pares `clave=valor`:
+The benchmark requires comparing many configurations, and doing so by hand
+through the menu is unfeasible. `Entrenar.tscn` accepts command-line parameters —
+everything after `--` is read as `key=value` pairs:
 
 ```bash
 godot --headless --path . res://Escenas/Entrenar.tscn -- nivel=1 generaciones=80 velocidad=8 bots=20 mutacion=0.15 sensores=111111111 semilla=1 incremental=0 etiqueta=mi_run
 ```
 
-Con `generaciones=N` el proceso se cierra solo al terminar, así que se pueden
-encadenar corridas desde un script. Claves admitidas: `nivel`, `etiqueta`,
-`generaciones`, `velocidad`, `bots`, `elitismo`, `capas`, `sensores`,
-`mutacion`, `magnitud`, `limite`, `seleccion`, `cruce`, `tipo_mutacion`,
-`presion`, `umbral`, `tipo_umbral`, `activacion`, `rango_h`, `rango_v`,
-`semilla`, `incremental`, `segundos_max`, `semilla_gen`, `evaluar`.
+With `generaciones=N` the process closes itself when done, so runs can be chained
+from a script. Accepted keys: `nivel`, `etiqueta`, `generaciones`, `velocidad`,
+`bots`, `elitismo`, `capas`, `sensores`, `mutacion`, `magnitud`, `limite`,
+`seleccion`, `cruce`, `tipo_mutacion`, `presion`, `umbral`, `tipo_umbral`,
+`activacion`, `rango_h`, `rango_v`, `semilla`, `incremental`, `segundos_max`,
+`semilla_gen`, `evaluar`.
 
-`sensores` acepta las dos formas: `111111111` (una casilla por sensor, en el
-orden de la tabla de arriba) o `0,1,3` (índices encendidos).
+`sensores` accepts both forms: `111111111` (one slot per sensor, in the order of
+the table above) or `0,1,3` (enabled indices).
 
-### Entrenamiento incremental y validación
+### Incremental training and validation
 
-`semilla_gen=<archivo>` arranca la población desde el campeón de otro nivel —
-es la recomendación 1 del PDF, entrenar nivel a nivel encadenando:
+`semilla_gen=<file>` starts the population from another level's champion — it's
+recommendation 1 of the PDF, training level by level in a chain:
 
 ```bash
 godot --headless --path . res://Escenas/Entrenar.tscn -- nivel=2 generaciones=30 semilla_gen=mejor_nivel1.json etiqueta=n2_incremental
 ```
 
-`evaluar=<archivo>` corre una población ya entrenada sobre un nivel **sin
-entrenar nada**: una sola generación, y escribe `eval_<etiqueta>.csv` con
-cuántos agentes completan el nivel. Es lo que produce el *porcentaje de
-completitud* y la *tasa de éxito en validación* del benchmark:
+`evaluar=<file>` runs an already-trained population on a level **without training
+anything**: a single generation, and it writes `eval_<etiqueta>.csv` with how many
+agents complete the level. This is what produces the benchmark's *completion
+percentage* and *validation success rate*:
 
 ```bash
 godot --headless --path . res://Escenas/Entrenar.tscn -- nivel=3 evaluar=poblacion_n2_incremental.json etiqueta=val_n3
 ```
 
-### Salidas del entrenamiento
+### Training outputs
 
-Todo va a la carpeta de datos de usuario
+Everything goes to the user data folder
 (`%APPDATA%\Godot\app_userdata\Genetic Dash OG\ia\`):
 
-- `<etiqueta>.csv` — una fila por generación con mejor/promedio/peor fitness,
-  % de completitud, cuántos bots completaron, tiempos y variación de los pesos
-  del élite. Es la materia prima del benchmark cuantitativo. `segundos_sim` es
-  tiempo simulado (comparable entre corridas a distinta velocidad) y
-  `segundos_reloj` es tiempo real.
-- `poblacion_<etiqueta>.json` — todas las redes de la última generación. La
-  validación las necesita completas, no solo al campeón: la tasa de éxito se
-  mide como qué fracción de los agentes entrenados completa un nivel que no
-  entrenaron.
-- `eval_<etiqueta>.csv` — resultado de una validación: agentes, cuántos
-  completaron, tasa de éxito y completitud media.
-- `mejor_<nivel>.json` — la mejor red encontrada. Si se deja activa la opción
-  de población inicial *"Mejor guardado de este nivel"*, el siguiente
-  entrenamiento arranca de ahí en vez de arrancar de ruido, que es el
-  **entrenamiento incremental** nivel a nivel.
+- `<etiqueta>.csv` — one row per generation with best/average/worst fitness,
+  completion %, how many bots completed, times and the variation of the elite's
+  weights. It's the raw material of the quantitative benchmark. `segundos_sim` is
+  simulated time (comparable across runs at different speeds) and `segundos_reloj`
+  is real time.
+- `poblacion_<etiqueta>.json` — all the networks of the last generation. Validation
+  needs them all, not just the champion: the success rate is measured as what
+  fraction of the trained agents completes a level they didn't train on.
+- `eval_<etiqueta>.csv` — result of a validation: agents, how many completed,
+  success rate and mean completion.
+- `mejor_<nivel>.json` — the best network found. If the initial-population option
+  *"Mejor guardado de este nivel"* is left enabled, the next training starts from
+  there instead of from noise, which is the **incremental training** level by level.
 
-## Capas de física
+## Physics layers
 
-| Capa | Contenido |
+| Layer | Contents |
 | --- | --- |
-| 1 | mundo sólido (suelo y bloques) |
-| 2 | jugador y bots |
-| 3 | púas |
-| 4 | orbes |
-| 5 | trampolines |
-| 6 | portales |
+| 1 | solid world (ground and blocks) |
+| 2 | player and bots |
+| 3 | spikes |
+| 4 | orbs |
+| 5 | jump pads |
+| 6 | portals |
 
-Los bots viven en la capa 2 y solo colisionan contra la 1, por eso pueden
-correr decenas a la vez sin chocar entre ellos.
+The bots live on layer 2 and only collide with layer 1, which is why dozens can
+run at once without bumping into each other.
 
-## Estructura
+## Structure
 
 ```
 Escenas/    Menu, MenuIA, Nivel1-3, Entrenar, Fin
-Objetos/    jugador, bloques, orbes, meta, portales (normal y nave)
-Scripts/    GDScript del jugador, niveles, menú y final
-Scripts/IA/ red neuronal, algoritmo genético, sensores, entrenador y registro
-Sprites/    arte del juego
-Sonidos/    música y SFX (CC0 — ver Sonidos/CREDITS.txt)
+Objetos/    player, blocks, orbs, goal, portals (normal and ship)
+Scripts/    GDScript for the player, levels, menu and end
+Scripts/IA/ neural network, genetic algorithm, sensors, trainer and logging
+Sprites/    game art
+Sonidos/    music and SFX (CC0 — see Sonidos/CREDITS.txt)
 ```
 
-## Créditos de audio
+## Audio credits
 
-Toda la música y los efectos son de
+All music and effects are by
 [Juhani Junkala (SubspaceAudio)](https://opengameart.org/content/5-chiptunes-action),
-publicados bajo **CC0 (dominio público)** en OpenGameArt.org. Detalle
-completo en [Sonidos/CREDITS.txt](Sonidos/CREDITS.txt).
+released under **CC0 (public domain)** on OpenGameArt.org. Full detail in
+[Sonidos/CREDITS.txt](Sonidos/CREDITS.txt).
 
-## Licencia
+## License
 
 [MIT](LICENSE)
