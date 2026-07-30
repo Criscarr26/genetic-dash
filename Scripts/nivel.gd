@@ -25,6 +25,19 @@ func activar_modo_ia() -> void:
 	# Con la simulación acelerada la música sonaría a chipmunk.
 	musica.stop()
 
+	# El HUD del nivel (título y ayuda de teclas) se dibuja en el mismo sitio
+	# que el panel del entrenador y los dos textos quedan encimados e
+	# ilegibles. En modo IA manda el panel del entrenador.
+	var hud := get_node_or_null("HUD")
+	if hud != null:
+		hud.visible = false
+
+	# Los carteles dentro del nivel ("¡Clic o Espacio para saltar!") son
+	# instrucciones para el humano y no pintan nada mientras entrena la IA.
+	for hijo in get_children():
+		if hijo is Label:
+			(hijo as Label).visible = false
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if modo_ia:

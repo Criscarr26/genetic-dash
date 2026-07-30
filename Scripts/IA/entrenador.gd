@@ -383,14 +383,17 @@ func _crear_hud() -> void:
 	capa.layer = 10
 	add_child(capa)
 
+	# El margen superior es generoso a proposito: con stretch "canvas_items" la
+	# capa se reescala segun la ventana, y con poco margen la primera linea se
+	# corta contra el borde de la pantalla.
 	var fondo := ColorRect.new()
-	fondo.color = Color(0.0, 0.0, 0.0, 0.45)
+	fondo.color = Color(0.0, 0.0, 0.0, 0.55)
 	fondo.position = Vector2(8, 8)
-	fondo.size = Vector2(430, 168)
+	fondo.size = Vector2(440, 190)
 	capa.add_child(fondo)
 
 	_hud = Label.new()
-	_hud.position = Vector2(20, 16)
+	_hud.position = Vector2(20, 26)
 	_hud.add_theme_font_size_override("font_size", 15)
 	capa.add_child(_hud)
 
